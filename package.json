@@ -60,6 +60,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.3.11",
+    "@angular-devkit/core": "^17.3.11",
     "@angular-devkit/schematics": "^17.3.11",
     "@angular/cli": "~17.3.11",
     "@angular/compiler-cli": "^17.3.12",
