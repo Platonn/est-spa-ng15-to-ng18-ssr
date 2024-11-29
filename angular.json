@@ -15,11 +15,12 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/test-spa-ng15-to-ng18-ssr/browser",
+            "outputPath": {
+              "base": "dist/test-spa-ng15-to-ng18-ssr"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -49,6 +50,12 @@
               "includePaths": [
                 "node_modules/"
               ]
+            },
+            "browser": "src/main.ts",
+            "server": "src/main.server.ts",
+            "prerender": true,
+            "ssr": {
+              "entry": "server.ts"
             }
           },
           "configurations": {
@@ -68,9 +75,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -131,66 +136,6 @@
               ]
             }
           }
-        },
-        "server": {
-          "builder": "@angular-devkit/build-angular:server",
-          "options": {
-            "outputPath": "dist/test-spa-ng15-to-ng18-ssr/server",
-            "main": "server.ts",
-            "tsConfig": "tsconfig.server.json",
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "node_modules/"
-              ]
-            },
-            "inlineStyleLanguage": "scss"
-          },
-          "configurations": {
-            "production": {
-              "outputHashing": "media"
-            },
-            "development": {
-              "optimization": false,
-              "sourceMap": true,
-              "extractLicenses": false,
-              "vendorChunk": true,
-              "buildOptimizer": false
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve-ssr": {
-          "builder": "@angular-devkit/build-angular:ssr-dev-server",
-          "configurations": {
-            "development": {
-              "browserTarget": "test-spa-ng15-to-ng18-ssr:build:development",
-              "serverTarget": "test-spa-ng15-to-ng18-ssr:server:development"
-            },
-            "production": {
-              "browserTarget": "test-spa-ng15-to-ng18-ssr:build:production",
-              "serverTarget": "test-spa-ng15-to-ng18-ssr:server:production"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
-        "prerender": {
-          "builder": "@angular-devkit/build-angular:prerender",
-          "options": {
-            "routes": [
-              "/"
-            ]
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "test-spa-ng15-to-ng18-ssr:build:production",
-              "serverTarget": "test-spa-ng15-to-ng18-ssr:server:production"
-            },
-            "development": {
-              "browserTarget": "test-spa-ng15-to-ng18-ssr:build:development",
-              "serverTarget": "test-spa-ng15-to-ng18-ssr:server:development"
-            }
-          },
-          "defaultConfiguration": "production"
         }
       }
     }
